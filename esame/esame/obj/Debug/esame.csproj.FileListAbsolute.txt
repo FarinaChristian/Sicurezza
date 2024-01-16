@@ -1,0 +1,7 @@
+C:\Users\crist\OneDrive\Desktop\esame\esame\bin\Debug\esame.exe.config
+C:\Users\crist\OneDrive\Desktop\esame\esame\bin\Debug\esame.exe
+C:\Users\crist\OneDrive\Desktop\esame\esame\bin\Debug\esame.pdb
+C:\Users\crist\OneDrive\Desktop\esame\esame\obj\Debug\esame.csprojAssemblyReference.cache
+C:\Users\crist\OneDrive\Desktop\esame\esame\obj\Debug\esame.csproj.CoreCompileInputs.cache
+C:\Users\crist\OneDrive\Desktop\esame\esame\obj\Debug\esame.exe
+C:\Users\crist\OneDrive\Desktop\esame\esame\obj\Debug\esame.pdb
