@@ -12,4 +12,4 @@
 
 -server.cs è il codice del payload, non vi serve (vi serve in caso voleste dare un'occhiata alla struttura del virus)
 
--server.py è il programma python che permette di usare https. Dovrete creare un certificato autogenerato. Quando la vittima scaricherà il virus, questo server vi stamperà il suo ip.
+-server.py è il programma python che permette di usare https. Dovrete creare un certificato autogenerato. Quando la vittima scaricherà il virus, questo server vi stamperà il suo ip. Anche qui dovete cambiare l'ip.
